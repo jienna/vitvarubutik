@@ -7,18 +7,20 @@ $password = "";
 $database_name = "vitvarubutik";
 $charset = "utf8";
 
+$sqlFileToExecute = "create.sql";
+
 // -------------------------
 // CONNECT
 // -------------------------
-$link = mysqli_connect($servername, $username, $password);
-if (!$link)
+$con = mysqli_connect($servername, $username, $password);
+if (!$con)
 {
   $output = 'Det gick inte att ansluta till databasservern.';
   include 'output.html.php';
   exit();
 }
 else {
-  $output = $output.'Databas anslutning etablerad.\n';
+  $output = $output.'Databas anslutning etablerad.<br>';
 }
 // -------------------------
 
@@ -27,74 +29,83 @@ else {
 // -------------------------
 // SET CHARSET
 // -------------------------
-if (!mysqli_set_charset($link, 'utf8'))
+if (!mysqli_set_charset($con, $charset))
 {
   $output = 'Det går inte att ställa in databasanslutningens kodning.';
   include 'output.html.php';
   exit();
 }
 else {
-  $output = $output.'Skapade databasen '.$database_name.'.\n';
+  $output = $output.'Ställde in databasanslutningens till '.$charset.'.<br>';
 }
 // -------------------------
 
 
 
+//
+// // -------------------------
+// // CREATE DATABASE
+// // -------------------------
+// $sql = 'CREATE DATABASE IF NOT EXISTS '.$database_name.' CHARACTER SET utf8 COLLATE utf8_general_ci;';
+// if (!mysqli_query($con, $sql))
+// {
+//   $output = 'FEL: ' . mysqli_error($con);
+//   include 'output.html.php';
+//   exit();
+// }
+// else {
+//   $output = $output.'Skapade databasen '.$database_name.'.\n';
+// }
+//
+// if (!mysqli_select_db($con, $database_name))
+// {
+//   $output = 'Det gick inte att hitta databasen '.$database_name.'.';
+//   include 'output.html.php';
+//   exit();
+// }
+// // -------------------------
+//
+//
+//
+// // -------------------------
+// // CREATE TABLES
+// // -------------------------
+// $sql = "";
+// if (!mysqli_query($con, $sql))
+// {
+//   $output = 'Error: ' . mysqli_error($con);
+//   include 'output.html.php';
+//   exit();
+// }
+// else {
+//   $output = $output.'Skapade tabeller.\n';
+// }
+// // -------------------------
 
-// -------------------------
-// CREATE DATABASE
-// -------------------------
-$sql = 'CREATE DATABASE IF NOT EXISTS'.$database_name.' CHARACTER SET utf8 COLLATE utf8_general_ci;';
-if (!mysqli_query($link, $sql))
-{
-  $output = 'FEL: ' . mysqli_error($link);
-  include 'output.html.php';
-  exit();
+
+// read the sql file
+$f = fopen($sqlFileToExecute,"r+");
+$sqlFile = fread($f, filesize($sqlFileToExecute));
+$sqlArray = explode(';',$sqlFile);
+foreach ($sqlArray as $stmt) {
+  if (strlen($stmt)>3 && substr(ltrim($stmt),0,2)!='/*') {
+    $result = mysqli_query($con, $stmt);
+    if (!$result) {
+      $sqlErrorCode = mysqli_errno($con);
+      $sqlErrorText = mysqli_error($con);
+      $sqlStmt = $stmt;
+      break;
+    }
+  }
 }
-else {
-  $output = $output.'Skapade databasen '.$database_name.'.\n';
+if (empty($sqlErrorCode)) {
+  $output = $output."Script was executed succesfully! ";
+} else {
+  $output = $output."An error occured during installation! ";
+  $output = $output."Error code: ".$sqlErrorCode." ";
+  $output = $output."Error text: ".$sqlErrorText." ";
+  $output = $output."Statement:<br>".$sqlStmt." ";
 }
-
-if (!mysqli_select_db($link, $database_name))
-{
-  $output = 'Det gick inte att hitta databasen '.$database_name.'.';
-  include 'output.html.php';
-  exit();
-}
-// -------------------------
-
-
-
-// -------------------------
-// CREATE TABLES
-// -------------------------
-$sql =
-'CREATE TABLE produkt (
-  produkt_id INT(6) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  namn VARCHAR(255) NOT NULL,
-  beskrivning VARCHAR(255) NOT NULL,
-  bild VARCHAR(255),
-  antal INT NOT NULL DEFAULT 0,
-  tillverkare VARCHAR(255),
-  modell VARCHAR(255),
-  energiklass VARCHAR(255),
-  garantitid_manader INT(6) UNSIGNED,
-  egenskap VARCHAR(255),
-  inkopspris DECIMAL(10, 2),
-  aktiv TINYINT(1) DEFAULT 1,
-  uppdaterad TIMESTAMP ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)';
-if (!mysqli_query($link, $sql))
-{
-  $output = 'Error: ' . mysqli_error($link);
-  include 'output.html.php';
-  exit();
-}
-else {
-  $output = $output.'Skapade tabeller.\n';
-}
-// -------------------------
-
 
 
 
