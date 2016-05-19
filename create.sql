@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS vitvarubutik CHARACTER SET utf8 COLLATE utf8_gener
 USE vitvarubutik;
 
 CREATE TABLE IF NOT EXISTS leverantor (
-  id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   namn VARCHAR(100) NOT NULL,
   beskrivning VARCHAR(255),
   telefonnummer VARCHAR(22),
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS leverantor (
 );
 
 CREATE TABLE IF NOT EXISTS produkt (
-  id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   namn VARCHAR(100) NOT NULL,
   beskrivning VARCHAR(255) NOT NULL,
   bild VARCHAR(255),
@@ -25,10 +25,10 @@ CREATE TABLE IF NOT EXISTS produkt (
   tillverkare VARCHAR(100),
   modell VARCHAR(100),
   energiklass VARCHAR(10),
-  garantitid_manader INT(6) UNSIGNED,
+  garantitid_manader INT UNSIGNED,
   egenskaper VARCHAR(255),
   inkopspris DECIMAL(10, 2),
-  leverantor INT(11) UNSIGNED DEFAULT NULL,
+  leverantor INT UNSIGNED DEFAULT NULL,
   aktiv TINYINT(1) DEFAULT 1,
   uppdaterad TIMESTAMP ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
@@ -40,10 +40,10 @@ CREATE TABLE IF NOT EXISTS produkt (
 );
 
 CREATE TABLE IF NOT EXISTS varugrupp (
-  id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   namn VARCHAR(100) NOT NULL,
   beskrivning VARCHAR(255),
-  varugrupp INT(11) UNSIGNED DEFAULT NULL,
+  varugrupp INT UNSIGNED DEFAULT NULL,
   PRIMARY KEY (id),
   CONSTRAINT fk_varugrupp_i_varugrupp
   FOREIGN KEY (varugrupp)
@@ -51,6 +51,110 @@ CREATE TABLE IF NOT EXISTS varugrupp (
   ON DELETE SET NULL
   ON UPDATE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS kampanj (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  namn VARCHAR(100) NOT NULL,
+  beskrivning VARCHAR(255),
+  rabattprocent INT UNSIGNED DEFAULT NULL,
+  startdatum DATE NOT NULL,
+  slutdatum DATE NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS grupp (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  namn VARCHAR(100) NOT NULL,
+  beskrivning VARCHAR(255),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS kop (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  antal INT NOT NULL,
+  datum DATETIME NOT NULL,
+  produkt INT UNSIGNED NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_produkt_i_kop
+  FOREIGN KEY (produkt)
+  REFERENCES produkt(id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS kund (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  namn VARCHAR(100) NOT NULL,
+  email VARCHAR(50),
+  telefonnummer VARCHAR(22),
+  gatuadress VARCHAR(100),
+  stad VARCHAR(100),
+  postnummer VARCHAR(50),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS produkt_grupp
+(
+    produkt INT UNSIGNED NOT NULL,
+    grupp INT UNSIGNED NOT NULL,
+    PRIMARY KEY (produkt, grupp),
+    CONSTRAINT fk_produkt_i_grupp
+    FOREIGN KEY (produkt) REFERENCES produkt(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    CONSTRAINT fk_grupp_i_produkt
+    FOREIGN KEY (grupp) REFERENCES grupp(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS produkt_varugrupp
+(
+    produkt INT UNSIGNED NOT NULL,
+    varugrupp INT UNSIGNED NOT NULL,
+    PRIMARY KEY (produkt, varugrupp),
+    CONSTRAINT fk_produkt_i_varugrupp
+    FOREIGN KEY (produkt) REFERENCES produkt(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    CONSTRAINT fk_varugrupp_i_produkt
+    FOREIGN KEY (varugrupp) REFERENCES varugrupp(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS kampanj_produkt
+(
+    kampanj INT UNSIGNED NOT NULL,
+    produkt INT UNSIGNED NOT NULL,
+    PRIMARY KEY (kampanj, produkt),
+    CONSTRAINT fk_kampanj_i_produkt
+    FOREIGN KEY (kampanj) REFERENCES kampanj(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    CONSTRAINT fk_produkt_i_kampanj
+    FOREIGN KEY (produkt) REFERENCES produkt(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS kampanj_varugrupp
+(
+    kampanj INT UNSIGNED NOT NULL,
+    varugrupp INT UNSIGNED NOT NULL,
+    PRIMARY KEY (kampanj, varugrupp),
+    CONSTRAINT fk_kampanj_i_varugrupp
+    FOREIGN KEY (kampanj) REFERENCES kampanj(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    CONSTRAINT fk_varugrupp_i_kampanj
+    FOREIGN KEY (varugrupp) REFERENCES varugrupp(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
 
 
 INSERT INTO leverantor
