@@ -167,10 +167,10 @@ VALUES
 
 
 INSERT INTO produkt
-(namn, beskrivning, bild, pris, antal, tillverkare, modell, energiklass, garantitid_manader, egenskaper, inkopspris, leverantor, aktiv, uppdaterad)
+(namn, beskrivning, bild, pris, antal, tillverkare, modell, energiklass, garantitid_manader, egenskaper, inkopspris, leverantor, uppdaterad)
 VALUES
-('Kyl', 'En sak som kyler', 'http://www.gransbygden.se/nya_bilder/produkter/org/49148958jVQjz95QWYUQho2.jpg', '1499.95', 50, 'Freeze n Cold', 'FRIDGE X5000', 'A++', '24', 'Kyltid: 2 minuter.', '1000', 2, '1', CURRENT_TIMESTAMP),
-('Frys', 'En sak som fryser', 'http://ourbestbites.com/wp-content/uploads/2012/06/Freezer.jpg', '1999.95', 100, 'Freeze n Cold', 'FREEZER X1000', 'A+++', '36', 'Frystid: 2 minuter.', '1599.99', 1, '1', CURRENT_TIMESTAMP);
+('Kyl', 'En sak som kyler', 'http://www.gransbygden.se/nya_bilder/produkter/org/49148958jVQjz95QWYUQho2.jpg', '1499.95', 50, 'Freeze n Cold', 'FRIDGE X5000', 'A++', '24', 'Kyltid: 2 minuter.', '1000', 2, CURRENT_TIMESTAMP),
+('Frys', 'En sak som fryser', 'http://ourbestbites.com/wp-content/uploads/2012/06/Freezer.jpg', '1999.95', 100, 'Freeze n Cold', 'FREEZER X1000', 'A+++', '36', 'Frystid: 2 minuter.', '1599.99', 1, CURRENT_TIMESTAMP);
 
 INSERT INTO varugrupp
 (namn, beskrivning, varugrupp)

@@ -44,7 +44,7 @@ else {
 
 //
 // // -------------------------
-// // CREATE DATABASE
+// // CREATE DATABASE !!!REPLACED!!!
 // // -------------------------
 // $sql = 'CREATE DATABASE IF NOT EXISTS '.$database_name.' CHARACTER SET utf8 COLLATE utf8_general_ci;';
 // if (!mysqli_query($con, $sql))
@@ -68,7 +68,7 @@ else {
 //
 //
 // // -------------------------
-// // CREATE TABLES
+// // CREATE TABLES !!!REPLACED!!!
 // // -------------------------
 // $sql = "";
 // if (!mysqli_query($con, $sql))
@@ -82,6 +82,10 @@ else {
 // }
 // // -------------------------
 
+
+// -------------------------
+// RUN SQL FROM FILE
+// -------------------------
 
 // read the sql file
 $f = fopen($sqlFileToExecute,"r+");
@@ -99,17 +103,20 @@ foreach ($sqlArray as $stmt) {
   }
 }
 if (empty($sqlErrorCode)) {
-  $output = $output."Script was executed succesfully! ";
+  $output = $output."Script utfördes framgångsrikt! ";
 } else {
-  $output = $output."An error occured during installation! ";
-  $output = $output."Error code: ".$sqlErrorCode." ";
-  $output = $output."Error text: ".$sqlErrorText." ";
-  $output = $output."Statement:<br>".$sqlStmt." ";
+  $output = $output."Ett fel inträffade under exekveringen! ";
+  $output = $output."<strong>Felkod:</strong> ".$sqlErrorCode." ";
+  $output = $output."<strong>Felmeddelande:</strong> ".$sqlErrorText." ";
+  $output = $output."<strong>SQL:</strong><br>".$sqlStmt." ";
 }
+// -------------------------
 
 
-
-$output = $output.'FÄRDIG!';
+// -------------------------
+// Show output.html.php
+// -------------------------
+$output = $output.'<br>KLAR!';
 include 'output.html.php';
 
 ?>
