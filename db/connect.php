@@ -11,7 +11,7 @@
   // -------------------------
   $con = mysqli_connect('localhost','root','','vitvarubutik');
   if (!$con) {
-    die('Could not connect: ' . mysqli_error($con));
+    die('Kunde inte koppla till databas: ' . mysqli_error($con));
   }
   // -------------------------
 

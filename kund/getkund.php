@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table, td, th {
-  border: 1px solid black;
-  padding: 5px;
-}
-
-th {text-align: left;}
-</style>
 </head>
 <body>
 
@@ -22,10 +9,16 @@ th {text-align: left;}
   // START CONNECTION AND GET VAR $con
   require(dirname( dirname(__FILE__))."\db\connect.php");
 
-  $q = intval($_GET['q']);
+  $id = intval($_GET['id']);
+  $namn = $_GET['namn'];
+  $email = $_GET['email'];
+  $telefonnummer = $_GET['telefonnummer'];
+  $gatuadress = $_GET['gatuadress'];
+  $stad = $_GET['stad'];
+  $postnummer = $_GET['postnummer'];
 
-  mysqli_select_db($con,"vitvarubutik");
-  $sql="SELECT * FROM kund WHERE id = '".$q."'";
+
+  $sql="SELECT * FROM kund WHERE id = '".$id."'";
   $result = mysqli_query($con,$sql);
 
   echo "<table>

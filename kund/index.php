@@ -44,10 +44,10 @@
       }
       xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-          document.getElementById("result").innerHTML = xmlhttp.responseText;
+          document.getElementById("message").innerHTML = xmlhttp.responseText;
         }
       };
-      xmlhttp.open("GET","getkund.php?q="+str,true);
+      xmlhttp.open("GET","updatekund.php?q="+str,true);
       xmlhttp.send();
     }
   }
