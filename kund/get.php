@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, td, th {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+th {text-align: left;}
+</style>
 </head>
 <body>
 
@@ -9,17 +22,11 @@
   // START CONNECTION AND GET VAR $con
   require(dirname( dirname(__FILE__))."\db\connect.php");
 
-  $id = intval($_GET['id']);
-  $namn = $_GET['namn'];
-  $email = $_GET['email'];
-  $telefonnummer = $_GET['telefonnummer'];
-  $gatuadress = $_GET['gatuadress'];
-  $stad = $_GET['stad'];
-  $postnummer = $_GET['postnummer'];
+  $q = intval($_GET['q']);
 
-
-  $sql="SELECT * FROM kund WHERE id = '".$id."'";
+  $sql="SELECT * FROM kund WHERE id = '".$q."'";
   $result = mysqli_query($con,$sql);
+
 
   echo "<table>
   <tr>
@@ -43,12 +50,6 @@
     echo "</tr>";
 
     echo "</table>";
-    echo '<form>';
-    echo '<div>';
-    echo '<input type="button" name="update" value="Ändra" onclick="updateKund('.$row['id'].')">';
-    echo '<input type="button" name="delete" value="Tabort" onclick="deleteKund('.$row['id'].')">';
-    echo '</div>';
-    echo '</form>';
   }
 
 
