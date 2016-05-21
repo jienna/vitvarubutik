@@ -165,6 +165,16 @@ VALUES
 ('Frans & co', 'Levererar saker', '76543210', 'Vägenochgatan 1A', 'Orten', '12345', 'Sverige'),
 ('Import AB', 'Importerar saker', '01234567', 'Gatanochvägen 2B', 'Staden', '54321', 'Sverige');
 
+INSERT INTO kampanj
+(namn, beskrivning, rabattprocent, startdatum, slutdatum)
+VALUES
+('SOMMAR SOL', 'Fira sommaren med strålande priser.', 10, '2016-05-20', '2016-07-01');
+
+INSERT INTO kund
+(namn, email, telefonnummer, gatuadress, stad, postnummer)
+VALUES
+('Lisa Johnson', 'lh@g.com', '5221655', 'Delvägen 1', 'Dopetorp', '84655'),
+('Klara Form', 'kf@g.com', '16622', 'kampgatan 2', 'fetsjö', '44566');
 
 INSERT INTO produkt
 (namn, beskrivning, bild, pris, antal, tillverkare, modell, energiklass, garantitid_manader, egenskaper, inkopspris, leverantor, uppdaterad)

@@ -1,13 +1,9 @@
 <?php
 
-  $db_hostname = 'localhost';
-  $db_database = 'vitvarubutik';
-  $db_username = 'root';
-  $db_password = '';
-  $db_charset = "utf8";
+  require('login.php');
 
   // -------------------------
-  // CONNECT
+  // CONNECT TO MySQL DATABASE
   // -------------------------
   $con = mysqli_connect('localhost','root','','vitvarubutik');
   if (!$con) {

@@ -10,15 +10,21 @@
 </head>
 <body>
 
-  <form action="controller.php" method="post">
+  <form action="check_login.php" method="post">
     <div>
-      <label><input type="text" name="firstname" placeholder="Förnamn" required="required"></label>
+      <label>Användarnamn
+        <br>
+        <input type="text" name="username" required="required">
+      </label>
     </div>
     <div>
-      <label><input type="text" name="lastname" placeholder="Efternamn"></label>
+      <label>Lösenord
+        <br>
+        <input type="password" name="password" required="required">
+      </label>
     </div>
     <div>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Logga in">
     </div>
   </form>
 
