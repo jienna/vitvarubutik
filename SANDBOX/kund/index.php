@@ -41,7 +41,8 @@
         <option value="">Välj en kund</option>
         <?php
         // START CONNECTION AND GET VAR $con
-        require(dirname(dirname(__FILE__))."\db\connect.php");
+        // vitvarubutik\sandbox\kund + \db\connect.php
+        require(dirname(dirname(dirname(__FILE__)))."\includes\db\connect.php");
 
         mysqli_select_db($con,"vitvarubutik");
 

@@ -20,7 +20,7 @@ th {text-align: left;}
   <?php
 
   // START CONNECTION AND GET VAR $con
-  require(dirname( dirname(__FILE__))."\db\connect.php");
+  require(dirname(dirname(dirname(__FILE__)))."\includes\db\connect.php");
 
   $q = intval($_GET['q']);
 
