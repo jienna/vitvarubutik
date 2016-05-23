@@ -40,14 +40,16 @@
       <select name="kund" onchange="showUser(this.value)">
         <option value="">Välj en kund</option>
         <?php
-
-
         // START CONNECTION AND GET VAR $con
         require(dirname( dirname(__FILE__))."\db\connect.php");
 
         mysqli_select_db($con,"vitvarubutik");
-        $sql="SELECT * FROM kund";
-        $result = mysqli_query($con,$sql);
+
+        $query  = "SELECT * ";
+        $query .= "FROM kund ";
+        $query .= "ORDER BY namn ASC";
+
+        $result = mysqli_query($con,$query);
 
         while($row = mysqli_fetch_array($result)) {
           echo '<option value="'.$row['id'].'">'.$row['namn'].'</option>';
