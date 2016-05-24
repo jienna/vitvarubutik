@@ -5,7 +5,7 @@
   // -------------------------
   // CONNECT TO MySQL DATABASE
   // -------------------------
-  $con = mysqli_connect('localhost','root','','vitvarubutik');
+  $con = mysqli_connect($db_hostname, $db_username, $db_password, $db_database);
   if (!$con) {
     die('Kunde inte koppla till databas: ' . mysqli_error($con));
   }

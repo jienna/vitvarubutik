@@ -55,6 +55,7 @@
         while($row = mysqli_fetch_array($result)) {
           echo '<option value="'.$row['id'].'">'.$row['namn'].'</option>';
         }
+        mysqli_close($con);
         ?>
       </select>
     </div>
