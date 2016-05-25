@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <title>Vitvarubutik</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <?php include dirname(dirname(__FILE__)).'\includes\stylesheets.php'; ?>  
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 </head>
 <body>
   <header>
-    <a href="index.php"><h1>Lars Bloms vitvarubutik</h1></a>
+    <h1>Lars Bloms vitvarubutik</h1>
+    <?php include dirname(dirname(__FILE__)).'\includes\menu.php';?>
   </header>
   <?php
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {   //something posted
@@ -29,23 +30,38 @@
       $query .= "(namn, email, telefonnummer, gatuadress, stad, postnummer) ";
       $query .= "VALUES ('".$namn."', '".$email."', '".$telefonnummer."', '".$gatuadress."', '".$stad."', '".$postnummer."')";
 
-      $result = mysqli_query($con,$query);
+      mysqli_query($con,$query);
+
+      if (mysqli_affected_rows($con) == 1) {
+        $output = "En ny kund skapades.";
+      }
+      else {
+        $output = "En ny kund kunde inte skapas! <br> Error:" . mysqli_error($con);
+      }
 
       mysqli_close($con); // ALWAYS CLOSE THE CONNECTION
-      
+
     }
   }
   ?>
   <section>
     <form class="" action="" method="post">
       <input type="text" name="namn" value="" required="required" placeholder="Namn">
-      <input type="text" name="email" value="" placeholder="Email">
+      <input type="email" name="email" value="" placeholder="Email">
       <input type="tel" name="telefonnummer" value="" placeholder="Telefonnummer">
       <input type="text" name="gatuadress" value="" placeholder="Gatuadress">
       <input type="text" name="stad" value="" placeholder="Stad">
       <input type="text" name="postnummer" value="" placeholder="Postnummer">
       <input type="submit" name="submit" value="Skapa">
     </form>
+
+    <p>
+      <?php if (isset($output) && !empty($output))
+      {
+        echo $output;
+      }
+      ?>
+    </p>
   </section>
 
   <footer>

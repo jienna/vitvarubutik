@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS vitvarubutik;
+
 CREATE DATABASE IF NOT EXISTS vitvarubutik CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 USE vitvarubutik;
