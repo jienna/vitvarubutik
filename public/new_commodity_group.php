@@ -18,7 +18,7 @@
     if (isset($_REQUEST['submit']) && !empty($_REQUEST['namn'])) {
       $namn = $_REQUEST['namn'];
       $beskrivning = $_REQUEST['beskrivning'];
-      $varugrupp = $_REQUEST['varugrupp'];
+      $varugrupp = !empty($_REQUEST['varugrupp']) ? $_REQUEST['varugrupp'] : "NULL";
 
       // Get mysql connection $con
       require (dirname(dirname(__FILE__))."\includes\db\connect.php");

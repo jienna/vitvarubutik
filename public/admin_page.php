@@ -16,8 +16,10 @@
   <section>
     <ul>
       <li><a href="new_customer.php">Lägg till en ny kund</a></li>
-      <li><a href="products.php">Visa produkter (Skapa/Radera)</a></li>
+      <li><a href="products.php">Visa produkter (Skapa/Radera/Inaktivera)</a></li>
+      <li><a href="suppliers.php">Visa leverantörer (Skapa/Radera/Inaktivera)</a></li>
       <li><a href="commodity_groups.php">Visa varugrupper (Skapa/Radera)</a></li>
+      <li><a href="product_customers.php">Lista kunder som köpt en produkt</a></li>
     </ul>
   </section>
   <footer>

@@ -6,18 +6,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $id = intval($_REQUEST['id']);
   if (isset($_REQUEST["btnDelete"])){
-    $query  = "DELETE FROM produkt ";
+    $query  = "DELETE FROM leverantor ";
     $query .= "WHERE id=".$id;
     $result = mysqli_query($con,$query);
   }
   else if (isset($_REQUEST["btnDeactivate"])){
-    $query  = "UPDATE produkt ";
+    $query  = "UPDATE leverantor ";
     $query .= "SET aktiv=0 ";
     $query .= "WHERE id=".$id;
     $result = mysqli_query($con,$query);
   }
   else if (isset($_REQUEST["btnActivate"])){
-    $query  = "UPDATE produkt ";
+    $query  = "UPDATE leverantor ";
     $query .= "SET aktiv=1 ";
     $query .= "WHERE id=".$id;
     $result = mysqli_query($con,$query);
@@ -32,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $output = "Inga rader ändrades!";
   }
 
-  include 'products.php';
+  include 'suppliers.php';
 }
 else {
-  include 'products.php';
+  include 'suppliers.php';
 }
 ?>

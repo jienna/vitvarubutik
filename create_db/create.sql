@@ -74,10 +74,16 @@ CREATE TABLE IF NOT EXISTS kop (
   antal INT NOT NULL,
   datum DATETIME NOT NULL,
   produkt INT UNSIGNED NOT NULL,
+  kund INT UNSIGNED NOT NULL,
   PRIMARY KEY (id),
   CONSTRAINT fk_produkt_i_kop
   FOREIGN KEY (produkt)
   REFERENCES produkt(id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+  CONSTRAINT fk_kund_i_kop
+  FOREIGN KEY (kund)
+  REFERENCES kund(id)
   ON DELETE CASCADE
   ON UPDATE CASCADE
 );
@@ -92,7 +98,7 @@ CREATE TABLE IF NOT EXISTS varugrupp (
   CONSTRAINT fk_varugrupp_i_varugrupp
   FOREIGN KEY (varugrupp)
   REFERENCES varugrupp(id)
-  ON DELETE SET NULL
+  ON DELETE CASCADE
   ON UPDATE CASCADE
 );
 
@@ -175,14 +181,20 @@ VALUES
 INSERT INTO kund
 (namn, email, telefonnummer, gatuadress, stad, postnummer)
 VALUES
-('Lisa Johnson', 'lh@g.com', '5221655', 'Delvägen 1', 'Dopetorp', '84655'),
-('Klara Form', 'kf@g.com', '16622', 'kampgatan 2', 'fetsjö', '44566');
+('Lisa Johnson', 'lh@g.com', '070125431', 'Delvägen 1', 'Mörtorp', '84655'),
+('Klara Form', 'kf@g.com', '076123458', 'Kampgatan 2', 'Sjöbo', '44566');
 
 INSERT INTO produkt
 (namn, beskrivning, bild, pris, antal, tillverkare, modell, energiklass, garantitid_manader, egenskaper, inkopspris, leverantor, uppdaterad)
 VALUES
-('Kyl', 'En sak som kyler', 'http://www.gransbygden.se/nya_bilder/produkter/org/49148958jVQjz95QWYUQho2.jpg', '1499.95', 50, 'Freeze n Cold', 'FRIDGE X5000', 'A++', '24', 'Kyltid: 2 minuter.', '1000', 2, CURRENT_TIMESTAMP),
-('Frys', 'En sak som fryser', 'http://ourbestbites.com/wp-content/uploads/2012/06/Freezer.jpg', '1999.95', 100, 'Freeze n Cold', 'FREEZER X1000', 'A+++', '36', 'Frystid: 2 minuter.', '1599.99', 1, CURRENT_TIMESTAMP);
+('Kyl', 'En sak som kyler', 'http://www.gransbygden.se/nya_bilder/produkter/org/49148958jVQjz95QWYUQho2.jpg', '1499.95', 63, 'Freeze n Cold', 'FRIDGE X5000', 'A++', '24', 'Kyltid: 2 minuter.', '1000', 2, CURRENT_TIMESTAMP),
+('Frys', 'En sak som fryser', 'http://ourbestbites.com/wp-content/uploads/2012/06/Freezer.jpg', '1999.95', 45, 'Freeze n Cold', 'FREEZER X1000', 'A+++', '36', 'Frystid: 2 minuter.', '1599.99', 1, CURRENT_TIMESTAMP);
+
+INSERT INTO kop (id, antal, datum, produkt, kund)
+VALUES
+(NULL, '1', '2016-04-01 09:35:00', '1', '1'),
+(NULL, '2', '2016-05-15 13:01:00', '2', '1'),
+(NULL, '1', '2016-05-20 10:20:00', '2', '2');
 
 INSERT INTO varugrupp
 (namn, beskrivning, varugrupp)
@@ -201,3 +213,8 @@ INSERT INTO produkt_grupp
 VALUES
 (1, 1),
 (2, 1);
+
+INSERT INTO kampanj_produkt
+(kampanj, produkt)
+VALUES
+(1,2);

@@ -1,3 +1,1 @@
-<?php
-echo '<link rel="stylesheet" href="stylesheets/main.css">';
- ?>
+<link rel="stylesheet" href="stylesheets/main.css">

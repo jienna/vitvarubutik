@@ -39,7 +39,7 @@
         echo "<td>";
         echo '<form action="delete_commodity_group.php" method="post">';
         echo '<input type="hidden" name="id" value="' . $row['id'] . '">';
-        echo '<input type="submit" name="btnDelete" value="Radera">';
+        echo '<input type="submit" name="btnDelete" value="Radera" onclick="return confirm(\'Säker?\')">';
         echo '</form>';
         echo "</td>";
         echo "</tr>";
