@@ -37,8 +37,8 @@
     <?php include dirname(dirname(__FILE__)).'\includes\menu.php';?>
   </header>
   <section>
+    <h2>Visa kunder för produkt</h2>
     <form>
-      <div>
         <label>Produkter:</label>
         <select name="produkt" onchange="showCustomers(this.value)">
           <option value="">Välj en produkt</option>
@@ -58,7 +58,6 @@
           mysqli_close($con);
           ?>
         </select>
-      </div>
     </form>
     <br>
     <div id="result"></div>

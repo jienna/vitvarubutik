@@ -17,12 +17,6 @@ $rq_order_by = (isset($_REQUEST["order_by"]) && !empty($_REQUEST["order_by"])) ?
 // För att spara vilken kolumn som sorterades.
 $_SESSION["order_by"] = (isset($_REQUEST["order_by"]) && !empty($_REQUEST["order_by"])) ? $_REQUEST["order_by"] : '';
 
-
-
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +34,7 @@ $_SESSION["order_by"] = (isset($_REQUEST["order_by"]) && !empty($_REQUEST["order
     <?php include dirname(dirname(__FILE__)).'\includes\menu.php';?>
   </header>
   <section>
+    <h2>Produkter</h2>
     <table>
       <tr>
         <th>
@@ -57,14 +52,14 @@ $_SESSION["order_by"] = (isset($_REQUEST["order_by"]) && !empty($_REQUEST["order
         <th>Pris</th>
         <th>
           <a href='products.php?order_by=antal<?php echo ($rq_desc == "0") ? '&desc=1' : '&desc=0'; ?>'>
-            Antal<?php if($rq_order_by == "antal"){ echo ($rq_desc == "1") ? '▼' : '▲'; } ?>
+            Antal&nbsp;i&nbsp;lager<?php if($rq_order_by == "antal"){ echo ($rq_desc == "1") ? '▼' : '▲'; } ?>
           </a>
         </th>
         <th>Tillverkare</th>
         <th>Modell</th>
         <th>Energiklass</th>
         <th>Garantitid</th>
-        <th>Egenskaper</th>
+        <th>Egenskap</th>
         <th>Inköpspris</th>
         <th>Leverantör</th>
         <th>Aktiv</th>
@@ -100,7 +95,7 @@ $_SESSION["order_by"] = (isset($_REQUEST["order_by"]) && !empty($_REQUEST["order
         echo "<td>" . $row['modell'] . "</td>";
         echo "<td>" . $row['energiklass'] . "</td>";
         echo "<td>" . $row['garantitid_manader'] . "</td>";
-        echo "<td>" . $row['egenskaper'] . "</td>";
+        echo "<td>" . $row['egenskap'] . "</td>";
         echo "<td>" . $row['inkopspris'] . "</td>";
         echo "<td>" . $row['leverantor'] . "</td>";
         echo "<td>" . $row['aktiv'] . "</td>";
@@ -116,6 +111,7 @@ $_SESSION["order_by"] = (isset($_REQUEST["order_by"]) && !empty($_REQUEST["order
           echo '<input type="submit" name="btnActivate" value="Aktivera">';
         }
         echo '</form>';
+        echo '<a href="edit_product.php?id='.$row['id'].'">Ändra</a>';
         echo "</td>";
         echo "</tr>";
       }

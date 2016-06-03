@@ -9,11 +9,12 @@ CREATE TABLE IF NOT EXISTS leverantor (
   namn VARCHAR(100) NOT NULL,
   beskrivning VARCHAR(255),
   telefonnummer VARCHAR(22),
+  email VARCHAR(50),
   gatuadress VARCHAR(100),
   stad VARCHAR(100),
   postnummer VARCHAR(50),
   land VARCHAR(100),
-  aktiv TINYINT(1) DEFAULT 1,
+  aktiv TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (id)
 );
 
@@ -56,7 +57,7 @@ CREATE TABLE IF NOT EXISTS produkt (
   modell VARCHAR(100),
   energiklass VARCHAR(10),
   garantitid_manader INT UNSIGNED,
-  egenskaper VARCHAR(255),
+  egenskap VARCHAR(255),
   inkopspris DECIMAL(10, 2),
   leverantor INT UNSIGNED DEFAULT NULL,
   aktiv TINYINT(1) DEFAULT 1,
@@ -72,7 +73,7 @@ CREATE TABLE IF NOT EXISTS produkt (
 CREATE TABLE IF NOT EXISTS kop (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   antal INT NOT NULL,
-  datum DATETIME NOT NULL,
+  datum DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   produkt INT UNSIGNED NOT NULL,
   kund INT UNSIGNED NOT NULL,
   PRIMARY KEY (id),
@@ -185,10 +186,12 @@ VALUES
 ('Klara Form', 'kf@g.com', '076123458', 'Kampgatan 2', 'Sjöbo', '44566');
 
 INSERT INTO produkt
-(namn, beskrivning, bild, pris, antal, tillverkare, modell, energiklass, garantitid_manader, egenskaper, inkopspris, leverantor, uppdaterad)
+(namn, beskrivning, bild, pris, antal, tillverkare, modell, energiklass, garantitid_manader, egenskap, inkopspris, leverantor, uppdaterad)
 VALUES
-('Kyl', 'En sak som kyler', 'http://www.gransbygden.se/nya_bilder/produkter/org/49148958jVQjz95QWYUQho2.jpg', '1499.95', 63, 'Freeze n Cold', 'FRIDGE X5000', 'A++', '24', 'Kyltid: 2 minuter.', '1000', 2, CURRENT_TIMESTAMP),
-('Frys', 'En sak som fryser', 'http://ourbestbites.com/wp-content/uploads/2012/06/Freezer.jpg', '1999.95', 45, 'Freeze n Cold', 'FREEZER X1000', 'A+++', '36', 'Frystid: 2 minuter.', '1599.99', 1, CURRENT_TIMESTAMP);
+('Kyl QR2645X-H', 'En sak som kyler', 'http://www.gransbygden.se/nya_bilder/produkter/org/49148958jVQjz95QWYUQho2.jpg', 1499.95, 63, 'Frans Vitvaror', 'FRIDGE X5000', 'A++', 24, 'Snabbkyl', 1000, 2, CURRENT_TIMESTAMP),
+('Frys GSN36MW31', 'En sak som fryser', 'http://ourbestbites.com/wp-content/uploads/2012/06/Freezer.jpg', 1999.95, 45, 'Freeze n Cold', 'FREEZER X1000', 'A+++', 36, 'Snabbfrys', 1599.99, 1, CURRENT_TIMESTAMP),
+('Tvättmaskin CR35PEZS5 ', 'En sak som tvättar', 'http://www.whirlpool.se/digitalassets/Picture/web1000x1000/AWO-D-7114_859230661010_1000x1000.jpg', 2800, 10, 'Whirlpool', 'Whirlwind', 'B', 60, 'Snabbtvätt', 2000, 2, CURRENT_TIMESTAMP),
+('KitchenAid 5KSM150PSECA', 'KitchenAid köksmaskin är den perfekta hjälpredan för alla matälskare.', 'http://www.elle.se/wp-content/uploads/2010/12/kitchenaid.jpg', 2490, 35, 'KitchenAid ', '5KSM150PSECA ', 'B', 12, 'Ingen egenskap', 2100, 2, CURRENT_TIMESTAMP);
 
 INSERT INTO kop (id, antal, datum, produkt, kund)
 VALUES
@@ -200,19 +203,35 @@ INSERT INTO varugrupp
 (namn, beskrivning, varugrupp)
 VALUES
 ('Vitvaror', 'Huvudgrupp', NULL),
+('Hushållsmaskiner', 'Huvudgrupp', NULL),
 ('Kylskåp', 'Undergrupp', 1),
-('Frysskåp', 'Undergrupp', 1);
+('Frysskåp', 'Undergrupp', 1),
+('Tvättmaskiner', 'Undergrupp', 1),
+('Diskmaskiner', 'Undergrupp', 1),
+('Spisar', 'Undergrupp', 1),
+('Matberedare', 'Undergrupp', 2),
+('kaffebryggare', 'Undergrupp', 2);
 
 INSERT INTO grupp
 (namn, beskrivning)
 VALUES
-('Kyl och frys', 'Köper man en kyl kommer man vilja köpa en frys.');
+('Kyl och frys', 'Köper man en kyl kommer man vilja köpa en frys.'),
+('Tvätt', 'Köper man en Tvättmaskin kommar man vilja köpa...');
 
 INSERT INTO produkt_grupp
 (produkt, grupp)
 VALUES
 (1, 1),
-(2, 1);
+(2, 1),
+(3, 2);
+
+INSERT INTO produkt_varugrupp
+(produkt, varugrupp)
+VALUES
+(1, 3),
+(2, 4),
+(3, 5),
+(4, 8);
 
 INSERT INTO kampanj_produkt
 (kampanj, produkt)

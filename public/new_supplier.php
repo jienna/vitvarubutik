@@ -19,6 +19,7 @@
       $namn = $_REQUEST['namn'];
       $beskrivning = $_REQUEST['beskrivning'];
       $telefonnummer = $_REQUEST['telefonnummer'];
+      $email = $_REQUEST['email'];
       $gatuadress = $_REQUEST['gatuadress'];
       $stad = $_REQUEST['stad'];
       $postnummer = $_REQUEST['postnummer'];
@@ -29,9 +30,9 @@
       require (dirname(dirname(__FILE__))."\includes\db\connect.php");
 
       $query  = "INSERT INTO leverantor ";
-      $query .= "(namn, beskrivning, telefonnummer, gatuadress, stad, postnummer,
+      $query .= "(namn, beskrivning, telefonnummer, email, gatuadress, stad, postnummer,
       land, aktiv) ";
-      $query .= "VALUES ('".$namn."', '".$beskrivning."', '".$telefonnummer."',
+      $query .= "VALUES ('".$namn."', '".$beskrivning."', '".$telefonnummer."', '".$email."',
       '".$gatuadress."', '".$stad."', '".$postnummer."', '".$land."',
       ".$aktiv.")";
 
@@ -50,16 +51,28 @@
   }
   ?>
   <section>
+    <h2>Registrera leverantör</h2>
     <form class="" action="" method="post">
       <input type="text" name="namn" value="" required="required" placeholder="Namn">
+      <br>
       <textarea rows="5" name="beskrivning" value="" placeholder="Beskrivning"></textarea>
+      <br>
       <input type="tel" name="telefonnummer" value="" placeholder="Telefonnummer">
+      <br>
+      <input type="email" name="email" value="" placeholder="Email">
+      <br>
       <input type="text" name="gatuadress" value="" placeholder="Gatuadress">
+      <br>
       <input type="text" name="stad" value="" placeholder="Stad">
+      <br>
       <input type="text" name="postnummer" value="" placeholder="Postnummer">
+      <br>
       <input type="text" name="land" value="" placeholder="Land">
-      <input type="checkbox" name="aktiv" value="1" checked>
-      <input type="submit" name="submit" value="Skapa">
+      <br>
+      <label>Aktiv: <input type="checkbox" name="aktiv" value="1" checked></label>
+      <br>
+      <br>
+      <input type="submit" name="submit" value="Registrera">
     </form>
 
     <p>

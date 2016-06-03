@@ -34,6 +34,7 @@ $_SESSION["order_by"] = (isset($_REQUEST["order_by"]) && !empty($_REQUEST["order
     <?php include dirname(dirname(__FILE__)).'\includes\menu.php';?>
   </header>
   <section>
+    <h2>Leverantörer</h2>
     <table>
       <tr>
         <th>
@@ -48,6 +49,7 @@ $_SESSION["order_by"] = (isset($_REQUEST["order_by"]) && !empty($_REQUEST["order
         </th>
         <th>Beskrivning</th>
         <th>Telefonnummer</th>
+        <th>Email</th>
         <th>Gatuadress</th>
         <th>Stad</th>
         <th>Postnummer</th>
@@ -80,6 +82,7 @@ $_SESSION["order_by"] = (isset($_REQUEST["order_by"]) && !empty($_REQUEST["order
         echo "<td>" . $row['namn'] . "</td>";
         echo "<td>" . $row['beskrivning'] . "</td>";
         echo "<td>" . $row['telefonnummer'] . "</td>";
+        echo "<td>" . $row['email'] . "</td>";
         echo "<td>" . $row['gatuadress'] . "</td>";
         echo "<td>" . $row['stad'] . "</td>";
         echo "<td>" . $row['postnummer'] . "</td>";

@@ -42,9 +42,14 @@
   }
   ?>
   <section>
+    <h2>Skapa varugrupp</h2>
     <form class="" action="" method="post">
       <input type="text" name="namn" value="" required="required" placeholder="Namn">
+      <br>
       <textarea rows="6" name="beskrivning" value="" placeholder="Beskrivning"></textarea>
+      <br>
+      <label>Varugrupp</label>
+      <br>
       <select name="varugrupp">
         <option value=""></option>
         <?php
@@ -61,6 +66,8 @@
           mysqli_close($con);
           ?>
         </select>
+        <br>
+        <br>
         <input type="submit" name="submit" value="Skapa">
       </form>
 

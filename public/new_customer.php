@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Vitvarubutik</title>
-  <?php include dirname(dirname(__FILE__)).'\includes\stylesheets.php'; ?>  
+  <?php include dirname(dirname(__FILE__)).'\includes\stylesheets.php'; ?>
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -45,14 +45,21 @@
   }
   ?>
   <section>
+    <h2>Registrera kund</h2>
     <form class="" action="" method="post">
       <input type="text" name="namn" value="" required="required" placeholder="Namn">
+      <br>
       <input type="email" name="email" value="" placeholder="Email">
+      <br>
       <input type="tel" name="telefonnummer" value="" placeholder="Telefonnummer">
+      <br>
       <input type="text" name="gatuadress" value="" placeholder="Gatuadress">
+      <br>
       <input type="text" name="stad" value="" placeholder="Stad">
+      <br>
       <input type="text" name="postnummer" value="" placeholder="Postnummer">
-      <input type="submit" name="submit" value="Skapa">
+      <br>
+      <input type="submit" name="submit" value="Registrera">
     </form>
 
     <p>

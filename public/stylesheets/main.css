@@ -4,6 +4,10 @@ nav {
   font-weight: bold;
 }
 
+input, select, textarea {
+  margin: 5px;
+}
+
 
 table {
   width: 100%;

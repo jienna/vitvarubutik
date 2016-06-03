@@ -14,6 +14,7 @@
     <?php include dirname(dirname(__FILE__)).'\includes\menu.php';?>
   </header>
   <section>
+    <h2>Varugrupper</h2>
     <table>
       <tr>
         <th>Id</th>

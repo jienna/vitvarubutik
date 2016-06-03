@@ -39,8 +39,6 @@
       echo "<td>" . $row['stad'] . "</td>";
       echo "<td>" . $row['postnummer']. "</td>";
       echo "</tr>";
-
-
     }
     echo "</table>";
   }
